@@ -39,7 +39,7 @@ const Experience = () => {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <section className="py-24 px-6 relative" id="experience">
+    <section className="py-16 md:py-24 px-4 md:px-6 relative" id="experience">
       <div className="container mx-auto max-w-5xl">
         <motion.div
           ref={ref}
@@ -47,7 +47,7 @@ const Experience = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-center mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-center mb-12 md:mb-16 px-4">
             <span className="neon-text">Experience</span>
           </h2>
 

@@ -45,7 +45,7 @@ const Skills = () => {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <section className="py-24 px-6 relative" id="skills">
+    <section className="py-16 md:py-24 px-4 md:px-6 relative" id="skills">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           ref={ref}
@@ -53,37 +53,43 @@ const Skills = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-center mb-16">
-            <span className="neon-text">Skills & Expertise</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-center mb-12 md:mb-16 px-4">
+            <span className="neon-text">Skills</span>
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             {skillCategories.map((category, categoryIndex) => (
               <motion.div
                 key={categoryIndex}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-                className="glass-card p-6 hover-lift"
+                whileHover={{ scale: 1.02 }}
+                className="glass-card p-5 md:p-6 hover-lift"
               >
-                <h3 className="text-xl font-bold text-primary mb-6">{category.title}</h3>
+                <h3 className="text-xl md:text-2xl font-bold text-primary mb-4 md:mb-6">{category.title}</h3>
                 
-                <div className="space-y-4">
+                <div className="space-y-3 md:space-y-4">
                   {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex}>
+                    <motion.div 
+                      key={skillIndex}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ duration: 0.5, delay: categoryIndex * 0.1 + skillIndex * 0.1 }}
+                    >
                       <div className="flex justify-between mb-2">
-                        <span className="text-foreground/90 font-medium">{skill.name}</span>
-                        <span className="text-secondary font-semibold">{skill.level}%</span>
+                        <span className="text-sm md:text-base text-foreground/90 font-medium">{skill.name}</span>
+                        <span className="text-sm md:text-base text-secondary font-semibold">{skill.level}%</span>
                       </div>
                       <div className="h-2 bg-muted/30 rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
                           animate={isInView ? { width: `${skill.level}%` } : {}}
-                          transition={{ duration: 1, delay: categoryIndex * 0.1 + skillIndex * 0.1 }}
-                          className="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
+                          transition={{ duration: 1.2, delay: categoryIndex * 0.1 + skillIndex * 0.1, ease: "easeOut" }}
+                          className="h-full bg-gradient-to-r from-primary to-secondary rounded-full shadow-[0_0_10px_rgba(59,130,246,0.5)]"
                         />
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
