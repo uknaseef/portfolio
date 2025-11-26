@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { ExternalLink, Smartphone } from "lucide-react";
+import { Smartphone, Apple } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const projects = [
   {
@@ -10,7 +11,8 @@ const projects = [
     stats: "10,000+ users",
     tech: ["Flutter", "Provider", "Firebase Auth"],
     gradient: "from-primary/20 via-accent/20 to-secondary/20",
-    link: "https://play.google.com/store/apps/details?id=joyalukkas.app.webremit&pcampaignid=web_share",
+    iosLink: "https://apps.apple.com/in/app/joyalukkas-exchange/id1479025554",
+    androidLink: "https://play.google.com/store/apps/details?id=joyalukkas.app.webremit&pcampaignid=web_share",
   },
   {
     title: "Express Health",
@@ -18,7 +20,8 @@ const projects = [
     stats: "WebView integration + device optimization",
     tech: ["Flutter", "REST API"],
     gradient: "from-secondary/20 via-accent/20 to-primary/20",
-    link: "https://play.google.com/store/apps/details?id=com.xpress.health&pcampaignid=web_share",
+    iosLink: "https://apps.apple.com/in/app/xpress-health/id1631544033",
+    androidLink: "https://play.google.com/store/apps/details?id=com.xpress.health&pcampaignid=web_share",
   },
   {
     title: "Limoverse",
@@ -26,6 +29,7 @@ const projects = [
     stats: "Increased workout completion by 45%",
     tech: ["Flutter", "AI Integration", "Firebase"],
     gradient: "from-accent/20 via-primary/20 to-secondary/20",
+    androidLink: "https://play.google.com/store/apps/details?id=com.app.limoverse&pcampaignid=web_share",
   },
   {
     title: "Short Vartha",
@@ -33,6 +37,8 @@ const projects = [
     stats: "Boosted re-engagement by 28%",
     tech: ["Flutter", "FCM", "Firebase"],
     gradient: "from-secondary/20 via-primary/20 to-accent/20",
+    iosLink: "https://apps.apple.com/in/app/short-vartha-malayalam-news/id6473996734",
+    androidLink: "https://play.google.com/store/apps/details?id=com.shortvartha.app&pcampaignid=web_share",
   },
 ];
 
@@ -77,14 +83,11 @@ const Projects = () => {
               >
                 <motion.div
                   whileHover={{ 
-                    y: -12,
-                    rotateX: hoveredIndex === index ? 5 : 0,
-                    rotateY: hoveredIndex === index ? 5 : 0,
-                    scale: 1.02,
-                    transition: { duration: 0.4, type: "spring", stiffness: 300 }
+                    y: -6,
+                    scale: 1.01,
+                    transition: { duration: 0.3, type: "spring", stiffness: 200 }
                   }}
                   className="glass-card p-6 md:p-8 group cursor-pointer relative overflow-hidden h-full"
-                  style={{ transformStyle: "preserve-3d" }}
                 >
                   {/* Animated Gradient Overlay */}
                   <motion.div 
@@ -102,32 +105,17 @@ const Projects = () => {
                   </div>
                   
                   <div className="relative z-10">
-                    <div className="flex items-start justify-between mb-6">
-                      <div className="flex items-start gap-3 flex-1">
-                        <motion.div
-                          whileHover={{ rotate: 360, scale: 1.1 }}
-                          transition={{ duration: 0.6 }}
-                          className="p-3 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 group-hover:from-primary/30 group-hover:to-secondary/30 transition-all shadow-lg"
-                        >
-                          <Smartphone className="w-5 h-5 text-primary" />
-                        </motion.div>
-                        <h3 className="text-xl md:text-2xl lg:text-3xl font-black text-primary group-hover:text-secondary transition-colors duration-300 leading-tight">
-                          {project.title}
-                        </h3>
-                      </div>
-                      {project.link && (
-                        <motion.a 
-                          href={project.link} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="transition-all p-2 rounded-xl bg-muted/30 group-hover:bg-primary/20"
-                          onClick={(e) => e.stopPropagation()}
-                          whileHover={{ scale: 1.1, rotate: 12 }}
-                          whileTap={{ scale: 0.9 }}
-                        >
-                          <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                        </motion.a>
-                      )}
+                    <div className="flex items-start gap-3 mb-6">
+                      <motion.div
+                        whileHover={{ rotate: 180, scale: 1.05 }}
+                        transition={{ duration: 0.4 }}
+                        className="p-3 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 group-hover:from-primary/30 group-hover:to-secondary/30 transition-all shadow-lg shrink-0"
+                      >
+                        <Smartphone className="w-5 h-5 text-primary" />
+                      </motion.div>
+                      <h3 className="text-xl md:text-2xl lg:text-3xl font-black text-primary group-hover:text-secondary transition-colors duration-300 leading-tight">
+                        {project.title}
+                      </h3>
                     </div>
 
                     <p className="text-foreground/80 mb-4 text-base md:text-lg font-medium leading-relaxed">
@@ -142,20 +130,58 @@ const Projects = () => {
                       {project.stats}
                     </motion.p>
 
-                    <div className="flex flex-wrap gap-2 md:gap-3">
+                    <div className="flex flex-wrap gap-2 md:gap-3 mb-6">
                       {project.tech.map((tech, i) => (
                         <motion.span
                           key={i}
                           initial={{ opacity: 0, scale: 0.8 }}
                           animate={isInView ? { opacity: 1, scale: 1 } : {}}
                           transition={{ delay: index * 0.15 + i * 0.05 }}
-                          whileHover={{ scale: 1.1, y: -2 }}
+                          whileHover={{ scale: 1.05, y: -1 }}
                           className="px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm font-bold bg-muted/50 border border-border/50 rounded-full text-foreground/80 hover:border-primary/50 hover:bg-primary/10 hover:text-primary transition-all backdrop-blur-sm"
                         >
                           {tech}
                         </motion.span>
                       ))}
                     </div>
+
+                    {/* App Store Links */}
+                    {(project.iosLink || project.androidLink) && (
+                      <div className="flex flex-wrap gap-3">
+                        {project.iosLink && (
+                          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="group relative overflow-hidden border border-border/50 bg-muted/30 hover:bg-primary/10 hover:border-primary/50 text-foreground font-medium rounded-xl transition-all"
+                              asChild
+                            >
+                              <a href={project.iosLink} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                                <Apple className="w-4 h-4 mr-2" />
+                                App Store
+                              </a>
+                            </Button>
+                          </motion.div>
+                        )}
+                        {project.androidLink && (
+                          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="group relative overflow-hidden border border-border/50 bg-muted/30 hover:bg-secondary/10 hover:border-secondary/50 text-foreground font-medium rounded-xl transition-all"
+                              asChild
+                            >
+                              <a href={project.androidLink} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                                <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                                  <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4483-.9993.9993-.9993c.5511 0 .9993.4483.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4483.9993.9993 0 .5511-.4483.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.2439 13.8533 7.8508 12 7.8508s-3.5902.3931-5.1367 1.0989L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3435-4.1021-2.6892-7.5743-6.1185-9.4396"/>
+                                </svg>
+                                Play Store
+                              </a>
+                            </Button>
+                          </motion.div>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   {/* Enhanced Border Glow on Hover */}
@@ -167,12 +193,12 @@ const Projects = () => {
                   {/* Corner Accents */}
                   <motion.div 
                     className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary/20 to-transparent rounded-bl-3xl opacity-0 group-hover:opacity-100 transition-opacity"
-                    animate={hoveredIndex === index ? { scale: [1, 1.2, 1] } : {}}
+                    animate={hoveredIndex === index ? { scale: [1, 1.1, 1] } : {}}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
                   <motion.div 
                     className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-secondary/20 to-transparent rounded-tr-3xl opacity-0 group-hover:opacity-100 transition-opacity"
-                    animate={hoveredIndex === index ? { scale: [1, 1.2, 1] } : {}}
+                    animate={hoveredIndex === index ? { scale: [1, 1.1, 1] } : {}}
                     transition={{ duration: 2, repeat: Infinity, delay: 1 }}
                   />
                 </motion.div>
